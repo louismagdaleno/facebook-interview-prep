@@ -7,25 +7,34 @@
 //   anagrams('rail safety', 'fairy tales') --> True
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
-
-function anagrams(stringA, stringB) {
-    const mapA = new Map();
-    const mapB = new Map();
+function isAlpha(char){
     const regex = /^[a-zA-Z]/;
 
-    for (let val of stringA){
-        if (regex.test(val)){
-            mapA.set(val, (mapA.get(val) + 1) || 1);
+    return regex.test(char);
+}
+
+function buildCharMap(str){
+    const map = new Map();
+    
+    for (let val of str){
+        if (isAlpha(val)){
+            map.set(val, (map.get(val) + 1) || 1);
         }
     }
 
-    for (let val of stringB){
-        if (regex.test(val)){
-            mapB.set(val, (mapB.get(val) + 1) || 1);
-        }
-    }
+    return map;
+}
 
-    if (mapA.size !== mapB.size){
+function isEqualSize(a,b){
+    return a.size === b.size;
+}
+
+function anagrams(stringA, stringB) {
+    const mapA = buildCharMap(stringA);
+    const mapB = buildCharMap(stringB);
+    
+
+    if (isEqualSize(mapA, mapB)){
         return false;
     }
 
