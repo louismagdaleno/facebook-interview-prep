@@ -51,4 +51,50 @@ function anagrams(stringA, stringB) {
 
 }
 
+function cacheMe(fn){
+    const cache = {};
+
+    return (n) => {
+        if (cache[n]){
+            return cache[n];
+        } else {
+            cache[n] = fn(n);
+            return cache[n];
+        }
+    };
+};
+
+const fib = cacheMe((n) => {
+    if (n < 2){
+        return 1;
+    } 
+    return fib( n - 1) + fib(n - 2);
+});
+
+// reverse a string using recursion
+class ReverseString {
+    reverse = str => {
+        if (str.length === 0){
+            return str;
+        }
+        return this.reverse(str.slice(1)) + str[0];
+    };
+};
+
+function reverseString(str){
+    let temp = [];
+
+    for (let i = str.length -1; i > 0; i--){
+        temp.push(str[i]);
+    }
+
+    return temp.join('');
+}
+
+function reverseStr(str){
+    let temp;
+
+    
+}
+
 module.exports = anagrams;
